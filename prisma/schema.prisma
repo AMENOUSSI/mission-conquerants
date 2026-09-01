@@ -1,0 +1,265 @@
+// Prisma schema — Mission Les Conquérants
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  CONTRIBUTOR
+}
+
+enum ContentStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  AUDIO
+  PDF
+}
+
+enum TestimonialCategory {
+  KITS_SCOLAIRES
+  KITS_ALIMENTAIRES
+  PEUPLES_NATIONS
+  PERSONNES
+}
+
+enum TestimonialFormat {
+  VIDEO
+  AUDIO
+  TEXT
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  role          Role     @default(CONTRIBUTOR)
+  active        Boolean  @default(true)
+  avatarMedia   Media?   @relation("UserAvatar", fields: [avatarMediaId], references: [id])
+  avatarMediaId String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  pages        Page[]
+  posts        Post[]
+  events       Event[]
+  projects     Project[]
+  conferences  Conference[]
+  testimonials Testimonial[]
+  media        Media[]       @relation("UploadedBy")
+
+  @@map("users")
+}
+
+model Page {
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  title          String
+  sections       Json
+  status         ContentStatus @default(DRAFT)
+  publishedAt    DateTime?
+  seoTitle       String?
+  seoDescription String?
+  ogImage        Media?        @relation("PageOgImage", fields: [ogImageId], references: [id])
+  ogImageId      String?
+  author         User          @relation(fields: [authorId], references: [id])
+  authorId       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+  @@map("pages")
+}
+
+model Post {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  excerpt      String
+  contentHtml  String
+  category     String?
+  coverImage   Media?        @relation("PostCover", fields: [coverImageId], references: [id])
+  coverImageId String?
+  status       ContentStatus @default(DRAFT)
+  publishedAt  DateTime?
+  author       User          @relation(fields: [authorId], references: [id])
+  authorId     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+  @@map("posts")
+}
+
+model Event {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  description  String
+  contentHtml  String?
+  location     String?
+  startAt      DateTime
+  endAt        DateTime?
+  coverImage   Media?        @relation("EventCover", fields: [coverImageId], references: [id])
+  coverImageId String?
+  status       ContentStatus @default(DRAFT)
+  publishedAt  DateTime?
+  author       User          @relation(fields: [authorId], references: [id])
+  authorId     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([status, startAt])
+  @@map("events")
+}
+
+model Project {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  summary      String
+  contentHtml  String
+  category     String?
+  coverImage   Media?        @relation("ProjectCover", fields: [coverImageId], references: [id])
+  coverImageId String?
+  status       ContentStatus @default(DRAFT)
+  publishedAt  DateTime?
+  author       User          @relation(fields: [authorId], references: [id])
+  authorId     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+  @@map("projects")
+}
+
+model Conference {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  description  String
+  videoUrl     String
+  coverImage   Media?        @relation("ConferenceCover", fields: [coverImageId], references: [id])
+  coverImageId String?
+  eventDate    DateTime?
+  location     String?
+  status       ContentStatus @default(DRAFT)
+  publishedAt  DateTime?
+  author       User          @relation(fields: [authorId], references: [id])
+  authorId     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([status, publishedAt])
+  @@map("conferences")
+}
+
+model Testimonial {
+  id           String              @id @default(cuid())
+  authorName   String
+  authorRole   String?
+  category     TestimonialCategory
+  format       TestimonialFormat
+  quote        String?
+  videoUrl     String?
+  audioMedia   Media?              @relation("TestimonialAudio", fields: [audioMediaId], references: [id])
+  audioMediaId String?
+  photoMedia   Media?              @relation("TestimonialPhoto", fields: [photoMediaId], references: [id])
+  photoMediaId String?
+  status       ContentStatus       @default(DRAFT)
+  publishedAt  DateTime?
+  order        Int                 @default(0)
+  author       User                @relation(fields: [authorId], references: [id])
+  authorId     String
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@index([status, publishedAt])
+  @@map("testimonials")
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  url         String?
+  logoMedia   Media    @relation("PartnerLogo", fields: [logoMediaId], references: [id])
+  logoMediaId String
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("partners")
+}
+
+model Media {
+  id           String    @id @default(cuid())
+  url          String
+  pathname     String
+  type         MediaType
+  filename     String
+  size         Int
+  altText      String?
+  uploadedBy   User      @relation("UploadedBy", fields: [uploadedById], references: [id])
+  uploadedById String
+  createdAt    DateTime  @default(now())
+
+  userAvatarFor       User?         @relation("UserAvatar")
+  pageOgFor           Page[]        @relation("PageOgImage")
+  postCoverFor        Post[]        @relation("PostCover")
+  eventCoverFor       Event[]       @relation("EventCover")
+  projectCoverFor     Project[]     @relation("ProjectCover")
+  partnerLogoFor      Partner[]     @relation("PartnerLogo")
+  conferenceCoverFor  Conference[]  @relation("ConferenceCover")
+  testimonialAudioFor Testimonial[] @relation("TestimonialAudio")
+  testimonialPhotoFor Testimonial[] @relation("TestimonialPhoto")
+
+  @@map("media")
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}
+
+model SiteSettings {
+  id           String   @id @default("singleton")
+  siteName     String   @default("Mission Les Conquérants")
+  tagline      String   @default("Être la lumière des nations")
+  contactEmail String   @default("contact@missionlesconquerants.org")
+  contactPhone String?
+  address      String?
+  facebookUrl  String?
+  instagramUrl String?
+  youtubeUrl   String?
+  footerNote   String   @default("Mission Les Conquérants — Ezéchiel 22:30")
+  heroTitle    String   @default("Porter le salut de Jésus-Christ jusqu'aux extrémités de la terre")
+  heroSubtitle String   @default("Une mission d'intercession, d'évangélisation et de soutien aux communautés non atteintes.")
+  missionText  String   @default("Intercéder pour les nations, évangéliser les milieux non atteints, impacter pour que des vies soient transformées, et apporter un soutien social et spirituel qui démontre l'amour de Dieu.")
+  visionText   String   @default("Être la lumière des nations et porter le salut de Jésus-Christ jusqu'aux extrémités de la terre.")
+  stats        Json?
+  updatedAt    DateTime @updatedAt
+
+  @@map("site_settings")
+}

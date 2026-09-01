@@ -1,26 +1,214 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Palette derived from the Mission Les Conquérants logo: the sky-blue wireframe
+  globe becomes the "ink" neutral family, the sunset silhouette photo gives the
+  single warm accent (amber). One accent, used consistently everywhere — public
+  site and admin (shadcn) alike, both read from these same raw tokens.
+
+  Theme is class-based (`.dark` on <html>, driven by next-themes with
+  defaultTheme="system") so it automatically follows the OS preference while
+  leaving room for a manual toggle later. See design-taste-frontend §4.11/§8.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* raw brand tokens */
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eceff4;
+
+  --color-ink-950: #0b1526;
+  --color-ink-900: #101a2e;
+  --color-ink-700: #2b3a55;
+  --color-ink-500: #5b6b87;
+  --color-ink-200: #d7dce6;
+  --color-ink-100: #eceff4;
+
+  --color-accent-700: #a8551b;
+  --color-accent-600: #b85e1e;
+  --color-accent-500: #d97a34;
+  --color-accent-100: #fbe3cb;
+
+  /* Static navy scale — does NOT flip under .dark. For chrome that is always
+     dark regardless of site theme (e.g. the footer), so it never inverts to
+     a light background when the visitor's OS is in dark mode. */
+  --color-navy-900: #101a2e;
+  --color-navy-500: #7c8aa3;
+  --color-navy-200: #c7cede;
+  --color-navy-100: #eceff4;
+
+  --color-danger: #b3261e;
+
+  --radius: 0.625rem;
+
+  /* shadcn semantic aliases → brand tokens (admin UI stays on-brand) */
+  --background: var(--color-bg);
+  --foreground: var(--color-ink-900);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ink-900);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ink-900);
+  --primary: var(--color-accent-600);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-surface-muted);
+  --secondary-foreground: var(--color-ink-900);
+  --muted: var(--color-surface-muted);
+  --muted-foreground: var(--color-ink-500);
+  --accent: var(--color-accent-100);
+  --accent-foreground: var(--color-accent-700);
+  --destructive: var(--color-danger);
+  --border: var(--color-ink-200);
+  --input: var(--color-ink-200);
+  --ring: var(--color-accent-500);
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-ink-900);
+  --sidebar-primary: var(--color-accent-600);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--color-surface-muted);
+  --sidebar-accent-foreground: var(--color-ink-900);
+  --sidebar-border: var(--color-ink-200);
+  --sidebar-ring: var(--color-accent-500);
+}
+
+.dark {
+  --color-bg: #0b1526;
+  --color-surface: #101a2e;
+  --color-surface-muted: #16233b;
+
+  --color-ink-950: #f7f8fa;
+  --color-ink-900: #f3f4f7;
+  --color-ink-700: #c7cede;
+  --color-ink-500: #93a0b8;
+  --color-ink-200: #2b3a55;
+  --color-ink-100: #182742;
+
+  --color-accent-700: #f0a869;
+  --color-accent-600: #eb9750;
+  --color-accent-500: #d97a34;
+  --color-accent-100: #3a2413;
+
+  --color-danger: #e5695f;
+
+  --background: var(--color-bg);
+  --foreground: var(--color-ink-900);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ink-900);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ink-900);
+  --primary: var(--color-accent-600);
+  --primary-foreground: var(--color-ink-950);
+  --secondary: var(--color-surface-muted);
+  --secondary-foreground: var(--color-ink-900);
+  --muted: var(--color-surface-muted);
+  --muted-foreground: var(--color-ink-500);
+  --accent: var(--color-accent-100);
+  --accent-foreground: var(--color-accent-700);
+  --destructive: var(--color-danger);
+  --border: var(--color-ink-200);
+  --input: var(--color-ink-200);
+  --ring: var(--color-accent-500);
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-ink-900);
+  --sidebar-primary: var(--color-accent-600);
+  --sidebar-primary-foreground: var(--color-ink-950);
+  --sidebar-accent: var(--color-surface-muted);
+  --sidebar-accent-foreground: var(--color-ink-900);
+  --sidebar-border: var(--color-ink-200);
+  --sidebar-ring: var(--color-accent-500);
 }
 
 @theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+
+  --color-ink-950: var(--color-ink-950);
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-500: var(--color-ink-500);
+  --color-ink-200: var(--color-ink-200);
+  --color-ink-100: var(--color-ink-100);
+
+  --color-accent-700: var(--color-accent-700);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-100: var(--color-accent-100);
+
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-500: var(--color-navy-500);
+  --color-navy-200: var(--color-navy-200);
+  --color-navy-100: var(--color-navy-100);
+
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-outfit);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-bg text-ink-900;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+::selection {
+  background: var(--color-accent-100);
+  color: var(--color-ink-950);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scroll-snap carousels (e.g. upcoming-missions) keep native touch/trackpad
+   scrolling for accessibility — only the scrollbar chrome is hidden. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
