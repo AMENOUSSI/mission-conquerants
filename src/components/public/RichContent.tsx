@@ -1,7 +1,25 @@
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
+
+// Admin-authored rich text is rendered server-side only (RSC), so a
+// jsdom-free sanitizer avoids the ESM/CJS interop breakage jsdom's
+// transitive deps hit when bundled for Vercel's serverless runtime.
+const ALLOWED_TAGS = [
+  "p", "br", "hr",
+  "h1", "h2", "h3", "h4", "h5", "h6",
+  "strong", "b", "em", "i", "u", "s", "code",
+  "ul", "ol", "li",
+  "blockquote", "a",
+];
 
 export function RichContent({ html, className = "" }: { html: string; className?: string }) {
-  const clean = DOMPurify.sanitize(html);
+  const clean = sanitizeHtml(html, {
+    allowedTags: ALLOWED_TAGS,
+    allowedAttributes: { a: ["href", "target", "rel"] },
+    allowedSchemes: ["http", "https", "mailto"],
+    transformTags: {
+      a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" }),
+    },
+  });
 
   return (
     <div
