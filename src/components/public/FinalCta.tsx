@@ -3,8 +3,14 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Container } from "@/components/public/Container";
 import { Reveal } from "@/components/public/Reveal";
 import { GlobeGraphic } from "@/components/public/GlobeGraphic";
+import { DonationDialog } from "@/components/public/DonationDialog";
+import type { getSiteSettings } from "@/lib/site-settings";
 
-export function FinalCta() {
+export function FinalCta({
+  settings,
+}: {
+  settings: Awaited<ReturnType<typeof getSiteSettings>>;
+}) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-accent-700 via-accent-600 to-accent-500 py-20 sm:py-32">
       <GlobeGraphic className="pointer-events-none absolute -bottom-40 -left-40 size-[36rem] text-white/10" />
@@ -37,12 +43,12 @@ export function FinalCta() {
               Rejoindre la mission
               <ArrowRight size={16} weight="bold" />
             </Link>
-            <Link
-              href="/contact"
+            <DonationDialog
+              settings={settings}
               className="inline-flex items-center gap-2 rounded-full border-2 border-white/50 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white/80 hover:bg-white/10 active:translate-y-px"
             >
               Nous soutenir
-            </Link>
+            </DonationDialog>
           </div>
         </Reveal>
       </Container>

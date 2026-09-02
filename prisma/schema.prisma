@@ -259,6 +259,16 @@ model SiteSettings {
   missionText  String   @default("Intercéder pour les nations, évangéliser les milieux non atteints, impacter pour que des vies soient transformées, et apporter un soutien social et spirituel qui démontre l'amour de Dieu.")
   visionText   String   @default("Être la lumière des nations et porter le salut de Jésus-Christ jusqu'aux extrémités de la terre.")
   stats        Json?
+
+  // Comptes affichés dans la modale "Faire un don" (bouton "Nous soutenir").
+  // Un champ vide masque le bloc correspondant dans la modale. moovFloozNumbers
+  // accepte plusieurs numéros séparés par une virgule.
+  donationBankName          String? @default("Bank of Africa")
+  donationBankAccountName   String? @default("MISSION LES CONQUERANTS")
+  donationBankAccountNumber String? @default("00 17 72 20 00 03")
+  donationMixxTogoNumber    String? @default("+228 91 39 42 43")
+  donationMoovFloozNumbers  String? @default("+228 98 85 25 09, +228 98 50 32 53")
+
   updatedAt    DateTime @updatedAt
 
   @@map("site_settings")

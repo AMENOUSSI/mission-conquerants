@@ -20,6 +20,11 @@ const FALLBACK_SETTINGS = {
   visionText:
     "Être la lumière des nations et porter le salut de Jésus-Christ jusqu'aux extrémités de la terre.",
   stats: null as unknown,
+  donationBankName: "Bank of Africa" as string | null,
+  donationBankAccountName: "MISSION LES CONQUERANTS" as string | null,
+  donationBankAccountNumber: "00 17 72 20 00 03" as string | null,
+  donationMixxTogoNumber: "+228 91 39 42 43" as string | null,
+  donationMoovFloozNumbers: "+228 98 85 25 09, +228 98 50 32 53" as string | null,
   updatedAt: new Date(0),
 };
 

@@ -4,11 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
+import { DonationDialog } from "@/components/public/DonationDialog";
+import type { getSiteSettings } from "@/lib/site-settings";
 
 export function MobileNav({
   items,
+  settings,
 }: {
   items: readonly { href: string; label: string }[];
+  settings: Awaited<ReturnType<typeof getSiteSettings>>;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -46,13 +50,15 @@ export function MobileNav({
                 </li>
               ))}
               <li className="mt-2">
-                <Link
-                  href="/contact"
-                  onClick={() => setOpen(false)}
-                  className="block rounded-lg bg-accent-600 px-3 py-3 text-center text-base font-semibold text-white hover:bg-accent-700"
+                <DonationDialog
+                  settings={settings}
+                  onOpenChange={(next) => {
+                    if (next) setOpen(false);
+                  }}
+                  className="block w-full rounded-lg bg-accent-600 px-3 py-3 text-center text-base font-semibold text-white hover:bg-accent-700"
                 >
                   Nous soutenir
-                </Link>
+                </DonationDialog>
               </li>
             </ul>
           </motion.nav>

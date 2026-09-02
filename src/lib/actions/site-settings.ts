@@ -24,6 +24,11 @@ export async function updateSiteSettings(formData: FormData): Promise<ActionResu
     heroSubtitle: formData.get("heroSubtitle"),
     missionText: formData.get("missionText"),
     visionText: formData.get("visionText"),
+    donationBankName: formData.get("donationBankName"),
+    donationBankAccountName: formData.get("donationBankAccountName"),
+    donationBankAccountNumber: formData.get("donationBankAccountNumber"),
+    donationMixxTogoNumber: formData.get("donationMixxTogoNumber"),
+    donationMoovFloozNumbers: formData.get("donationMoovFloozNumbers"),
   });
 
   if (!parsed.success) {
@@ -39,6 +44,11 @@ export async function updateSiteSettings(formData: FormData): Promise<ActionResu
       facebookUrl: parsed.data.facebookUrl || null,
       instagramUrl: parsed.data.instagramUrl || null,
       youtubeUrl: parsed.data.youtubeUrl || null,
+      donationBankName: parsed.data.donationBankName || null,
+      donationBankAccountName: parsed.data.donationBankAccountName || null,
+      donationBankAccountNumber: parsed.data.donationBankAccountNumber || null,
+      donationMixxTogoNumber: parsed.data.donationMixxTogoNumber || null,
+      donationMoovFloozNumbers: parsed.data.donationMoovFloozNumbers || null,
     },
   });
 

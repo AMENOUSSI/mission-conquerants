@@ -23,6 +23,11 @@ type SiteSettingsValues = {
   heroSubtitle: string;
   missionText: string;
   visionText: string;
+  donationBankName: string | null;
+  donationBankAccountName: string | null;
+  donationBankAccountNumber: string | null;
+  donationMixxTogoNumber: string | null;
+  donationMoovFloozNumbers: string | null;
 };
 
 export function SiteSettingsForm({
@@ -53,6 +58,7 @@ export function SiteSettingsForm({
         <TabsList>
           <TabsTrigger value="general">Général</TabsTrigger>
           <TabsTrigger value="home">Page d&apos;accueil</TabsTrigger>
+          <TabsTrigger value="donations">Dons</TabsTrigger>
         </TabsList>
 
         <TabsContent value="general" forceMount className="mt-6 flex flex-col gap-5 data-[state=inactive]:hidden">
@@ -127,6 +133,64 @@ export function SiteSettingsForm({
           <div className="grid gap-2">
             <Label htmlFor="visionText">Texte de vision</Label>
             <Textarea id="visionText" name="visionText" required rows={4} defaultValue={initialValues.visionText} />
+          </div>
+        </TabsContent>
+
+        <TabsContent
+          value="donations"
+          forceMount
+          className="mt-6 flex flex-col gap-5 data-[state=inactive]:hidden"
+        >
+          <p className="text-sm text-muted-foreground">
+            Comptes affichés dans la fenêtre &laquo;&nbsp;Faire un don&nbsp;&raquo; ouverte par le
+            bouton &laquo;&nbsp;Nous soutenir&nbsp;&raquo;. Laisser un champ vide masque le bloc
+            correspondant.
+          </p>
+          <div className="grid gap-2">
+            <Label htmlFor="donationBankName">Nom de la banque</Label>
+            <Input
+              id="donationBankName"
+              name="donationBankName"
+              placeholder="Bank of Africa"
+              defaultValue={initialValues.donationBankName ?? ""}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="donationBankAccountName">Nom du compte</Label>
+            <Input
+              id="donationBankAccountName"
+              name="donationBankAccountName"
+              placeholder="MISSION LES CONQUERANTS"
+              defaultValue={initialValues.donationBankAccountName ?? ""}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="donationBankAccountNumber">Numéro du compte</Label>
+            <Input
+              id="donationBankAccountNumber"
+              name="donationBankAccountNumber"
+              placeholder="00 17 72 20 00 03"
+              defaultValue={initialValues.donationBankAccountNumber ?? ""}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="donationMixxTogoNumber">Numéro Mixx Togo</Label>
+            <Input
+              id="donationMixxTogoNumber"
+              name="donationMixxTogoNumber"
+              placeholder="+228 91 39 42 43"
+              defaultValue={initialValues.donationMixxTogoNumber ?? ""}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="donationMoovFloozNumbers">Numéros Moov Money Flooz</Label>
+            <Input
+              id="donationMoovFloozNumbers"
+              name="donationMoovFloozNumbers"
+              placeholder="+228 98 85 25 09, +228 98 50 32 53"
+              defaultValue={initialValues.donationMoovFloozNumbers ?? ""}
+            />
+            <p className="text-xs text-muted-foreground">Séparez plusieurs numéros par une virgule.</p>
           </div>
         </TabsContent>
       </Tabs>

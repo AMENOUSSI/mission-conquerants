@@ -131,7 +131,7 @@ export default async function HomePage() {
 
       <PartnersStrip partners={partners} />
 
-      <FinalCta />
+      <FinalCta settings={settings} />
     </>
   );
 }

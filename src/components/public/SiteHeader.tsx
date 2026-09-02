@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { SiteLogo } from "@/components/public/SiteLogo";
 import { MobileNav } from "@/components/public/MobileNav";
+import { DonationDialog } from "@/components/public/DonationDialog";
 import { PRIMARY_NAV, MOBILE_NAV } from "@/lib/nav";
 import type { getSiteSettings } from "@/lib/site-settings";
 
@@ -64,14 +65,14 @@ export function SiteHeader({
           </ul>
         </nav>
 
-        <Link
-          href="/contact"
+        <DonationDialog
+          settings={settings}
           className="hidden shrink-0 rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-700 active:translate-y-px lg:inline-block"
         >
           Nous soutenir
-        </Link>
+        </DonationDialog>
 
-        <MobileNav items={MOBILE_NAV} />
+        <MobileNav items={MOBILE_NAV} settings={settings} />
       </div>
     </header>
   );
