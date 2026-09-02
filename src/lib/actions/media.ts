@@ -31,7 +31,7 @@ export async function uploadMediaAction(formData: FormData): Promise<ActionResul
     revalidatePath("/admin/medias");
     return { success: true, data: { id: media.id, url: media.url } };
   } catch (error) {
-    if (error instanceof UnauthenticatedError || error instanceof ForbiddenError) {
+    if (error instanceof Error) {
       return { success: false, message: error.message };
     }
     return { success: false, message: "Le téléversement a échoué." };
