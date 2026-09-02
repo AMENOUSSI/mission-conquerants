@@ -22,4 +22,10 @@ export const siteSettingsSchema = z.object({
   donationBankAccountNumber: z.string().trim().max(100).optional().or(z.literal("")),
   donationMixxTogoNumber: z.string().trim().max(100).optional().or(z.literal("")),
   donationMoovFloozNumbers: z.string().trim().max(200).optional().or(z.literal("")),
+  stat1Value: z.string().trim().max(20).optional().or(z.literal("")),
+  stat1Label: z.string().trim().max(60).optional().or(z.literal("")),
+  stat2Value: z.string().trim().max(20).optional().or(z.literal("")),
+  stat2Label: z.string().trim().max(60).optional().or(z.literal("")),
+  stat3Value: z.string().trim().max(20).optional().or(z.literal("")),
+  stat3Label: z.string().trim().max(60).optional().or(z.literal("")),
 });

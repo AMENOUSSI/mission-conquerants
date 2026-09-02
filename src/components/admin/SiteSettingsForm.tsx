@@ -31,6 +31,12 @@ type SiteSettingsValues = {
   donationBankAccountNumber: string | null;
   donationMixxTogoNumber: string | null;
   donationMoovFloozNumbers: string | null;
+  stat1Value: string;
+  stat1Label: string;
+  stat2Value: string;
+  stat2Label: string;
+  stat3Value: string;
+  stat3Label: string;
 };
 
 export function SiteSettingsForm({
@@ -168,6 +174,30 @@ export function SiteSettingsForm({
               required
               defaultValue={initialValues.heroVerseReference}
             />
+          </div>
+
+          <div className="grid gap-3">
+            <Label>Chiffres clés (bandeau sous le hero)</Label>
+            <p className="-mt-1 text-xs text-muted-foreground">
+              Jusqu&apos;à 3 chiffres. Laisser une paire vide pour ne pas l&apos;afficher ; si les 3 sont
+              vides, le bandeau est masqué.
+            </p>
+            {([1, 2, 3] as const).map((n) => (
+              <div key={n} className="grid grid-cols-[7rem_1fr] gap-2">
+                <Input
+                  name={`stat${n}Value`}
+                  placeholder="Ex. 12"
+                  aria-label={`Valeur du chiffre ${n}`}
+                  defaultValue={initialValues[`stat${n}Value` as const]}
+                />
+                <Input
+                  name={`stat${n}Label`}
+                  placeholder="Ex. missions menées"
+                  aria-label={`Légende du chiffre ${n}`}
+                  defaultValue={initialValues[`stat${n}Label` as const]}
+                />
+              </div>
+            ))}
           </div>
         </TabsContent>
 

@@ -43,3 +43,17 @@ export const getSiteSettings = cache(async () => {
     return FALLBACK_SETTINGS;
   }
 });
+
+export type StatItem = { value: string; label: string };
+
+/** Reads SiteSettings.stats (a loosely-typed Json column) back into a safe, well-typed array. */
+export function parseStats(stats: unknown): StatItem[] {
+  if (!Array.isArray(stats)) return [];
+  return stats.filter(
+    (item): item is StatItem =>
+      typeof item === "object" &&
+      item !== null &&
+      typeof (item as StatItem).value === "string" &&
+      typeof (item as StatItem).label === "string",
+  );
+}

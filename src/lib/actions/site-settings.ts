@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/rbac";
 import { siteSettingsSchema } from "@/lib/validations/site-settings";
-import { Role } from "@/generated/prisma/client";
+import { Role, Prisma } from "@/generated/prisma/client";
 import type { ActionResult } from "@/lib/actions/media";
 
 export async function updateSiteSettings(formData: FormData): Promise<ActionResult> {
@@ -32,27 +32,41 @@ export async function updateSiteSettings(formData: FormData): Promise<ActionResu
     donationBankAccountNumber: formData.get("donationBankAccountNumber"),
     donationMixxTogoNumber: formData.get("donationMixxTogoNumber"),
     donationMoovFloozNumbers: formData.get("donationMoovFloozNumbers"),
+    stat1Value: formData.get("stat1Value"),
+    stat1Label: formData.get("stat1Label"),
+    stat2Value: formData.get("stat2Value"),
+    stat2Label: formData.get("stat2Label"),
+    stat3Value: formData.get("stat3Value"),
+    stat3Label: formData.get("stat3Label"),
   });
 
   if (!parsed.success) {
     return { success: false, message: parsed.error.issues[0]?.message ?? "Formulaire invalide." };
   }
 
+  const { stat1Value, stat1Label, stat2Value, stat2Label, stat3Value, stat3Label, ...rest } = parsed.data;
+  const stats = [
+    { value: stat1Value ?? "", label: stat1Label ?? "" },
+    { value: stat2Value ?? "", label: stat2Label ?? "" },
+    { value: stat3Value ?? "", label: stat3Label ?? "" },
+  ].filter((stat) => stat.value && stat.label);
+
   await prisma.siteSettings.update({
     where: { id: "singleton" },
     data: {
-      ...parsed.data,
-      contactPhone: parsed.data.contactPhone || null,
-      whatsappNumber: parsed.data.whatsappNumber || null,
-      address: parsed.data.address || null,
-      facebookUrl: parsed.data.facebookUrl || null,
-      instagramUrl: parsed.data.instagramUrl || null,
-      youtubeUrl: parsed.data.youtubeUrl || null,
-      donationBankName: parsed.data.donationBankName || null,
-      donationBankAccountName: parsed.data.donationBankAccountName || null,
-      donationBankAccountNumber: parsed.data.donationBankAccountNumber || null,
-      donationMixxTogoNumber: parsed.data.donationMixxTogoNumber || null,
-      donationMoovFloozNumbers: parsed.data.donationMoovFloozNumbers || null,
+      ...rest,
+      contactPhone: rest.contactPhone || null,
+      whatsappNumber: rest.whatsappNumber || null,
+      address: rest.address || null,
+      facebookUrl: rest.facebookUrl || null,
+      instagramUrl: rest.instagramUrl || null,
+      youtubeUrl: rest.youtubeUrl || null,
+      donationBankName: rest.donationBankName || null,
+      donationBankAccountName: rest.donationBankAccountName || null,
+      donationBankAccountNumber: rest.donationBankAccountNumber || null,
+      donationMixxTogoNumber: rest.donationMixxTogoNumber || null,
+      donationMoovFloozNumbers: rest.donationMoovFloozNumbers || null,
+      stats: stats.length > 0 ? stats : Prisma.JsonNull,
     },
   });
 

@@ -4,6 +4,14 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Container } from "@/components/public/Container";
 import { Reveal } from "@/components/public/Reveal";
 import { GlobeGraphic } from "@/components/public/GlobeGraphic";
+import { formatRelativeDays } from "@/lib/format";
+
+export type NextMission = {
+  slug: string;
+  title: string;
+  startAt: Date;
+  isNew: boolean;
+};
 
 export function Hero({
   title,
@@ -12,6 +20,7 @@ export function Hero({
   imageAlt,
   verseText,
   verseReference,
+  nextMission,
 }: {
   title: string;
   subtitle: string;
@@ -19,6 +28,7 @@ export function Hero({
   imageAlt: string;
   verseText: string;
   verseReference: string;
+  nextMission?: NextMission | null;
 }) {
   return (
     <section className="relative -mt-16 min-h-[100dvh] overflow-hidden bg-navy-900 pt-16">
@@ -45,6 +55,33 @@ export function Hero({
 
       <Container className="relative flex min-h-[calc(100dvh-4rem)] flex-col justify-between py-16 sm:py-20">
         <div className="flex flex-1 flex-col justify-center">
+          {nextMission && (
+            <Reveal className="mb-6">
+              <Link
+                href={`/evenements/${nextMission.slug}`}
+                className="group inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium text-white backdrop-blur transition-colors hover:bg-white/15 sm:text-sm"
+              >
+                {nextMission.isNew && (
+                  <span className="relative flex size-2 shrink-0" aria-hidden>
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent-400 opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-accent-500" />
+                  </span>
+                )}
+                <span className="shrink-0 font-semibold text-accent-300">Prochaine mission</span>
+                <span aria-hidden className="shrink-0 text-white/40">
+                  ·
+                </span>
+                <span className="truncate">{nextMission.title}</span>
+                <span className="shrink-0 text-white/70">({formatRelativeDays(nextMission.startAt)})</span>
+                <ArrowRight
+                  size={14}
+                  weight="bold"
+                  className="shrink-0 transition-transform group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Reveal>
+          )}
+
           <Reveal>
             <p className="text-xs font-medium tracking-[0.22em] text-accent-400 uppercase">
               {verseReference}

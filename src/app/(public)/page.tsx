@@ -12,7 +12,9 @@ import { Container } from "@/components/public/Container";
 import { Reveal } from "@/components/public/Reveal";
 import { PartnersStrip } from "@/components/public/PartnersStrip";
 import { FinalCta } from "@/components/public/FinalCta";
+import { StatsStrip } from "@/components/public/StatsStrip";
 import { getSiteSettings } from "@/lib/site-settings";
+import { isRecent } from "@/lib/format";
 import {
   getPublishedProjects,
   getUpcomingEvents,
@@ -33,6 +35,16 @@ export default async function HomePage() {
     getActivePartners(),
   ]);
 
+  const nextEvent = missions[0];
+  const nextMission = nextEvent
+    ? {
+        slug: nextEvent.slug,
+        title: nextEvent.title,
+        startAt: nextEvent.startAt,
+        isNew: isRecent(nextEvent.publishedAt, 14),
+      }
+    : null;
+
   return (
     <>
       <Hero
@@ -42,7 +54,10 @@ export default async function HomePage() {
         imageAlt="L'équipe de la Mission Les Conquérants sur le terrain"
         verseText={settings.heroVerseText}
         verseReference={settings.heroVerseReference}
+        nextMission={nextMission}
       />
+
+      <StatsStrip stats={settings.stats} />
 
       <CallSection missionText={settings.missionText} />
 
