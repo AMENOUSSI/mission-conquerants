@@ -15,6 +15,8 @@ export const siteSettingsSchema = z.object({
   heroSubtitle: z.string().trim().min(5).max(300),
   missionText: z.string().trim().min(10).max(1000),
   visionText: z.string().trim().min(10).max(1000),
+  heroVerseText: z.string().trim().min(5).max(400),
+  heroVerseReference: z.string().trim().min(2).max(100),
   donationBankName: z.string().trim().max(100).optional().or(z.literal("")),
   donationBankAccountName: z.string().trim().max(150).optional().or(z.literal("")),
   donationBankAccountNumber: z.string().trim().max(100).optional().or(z.literal("")),

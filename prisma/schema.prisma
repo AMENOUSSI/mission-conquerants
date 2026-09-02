@@ -259,6 +259,8 @@ model SiteSettings {
   heroSubtitle String   @default("Une mission d'intercession, d'évangélisation et de soutien aux communautés non atteintes.")
   missionText  String   @default("Intercéder pour les nations, évangéliser les milieux non atteints, impacter pour que des vies soient transformées, et apporter un soutien social et spirituel qui démontre l'amour de Dieu.")
   visionText   String   @default("Être la lumière des nations et porter le salut de Jésus-Christ jusqu'aux extrémités de la terre.")
+  heroVerseText      String @default("Je cherchai parmi eux un homme qui élevât une muraille, et qui se tînt à la brèche devant moi pour le pays…")
+  heroVerseReference String @default("Ézéchiel 22:30")
   stats        Json?
 
   // Comptes affichés dans la modale "Faire un don" (bouton "Nous soutenir").

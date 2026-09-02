@@ -20,6 +20,9 @@ const FALLBACK_SETTINGS = {
     "Intercéder pour les nations, évangéliser les milieux non atteints, impacter pour que des vies soient transformées, et apporter un soutien social et spirituel qui démontre l'amour de Dieu.",
   visionText:
     "Être la lumière des nations et porter le salut de Jésus-Christ jusqu'aux extrémités de la terre.",
+  heroVerseText:
+    "Je cherchai parmi eux un homme qui élevât une muraille, et qui se tînt à la brèche devant moi pour le pays…",
+  heroVerseReference: "Ézéchiel 22:30",
   stats: null as unknown,
   donationBankName: "Bank of Africa" as string | null,
   donationBankAccountName: "MISSION LES CONQUERANTS" as string | null,

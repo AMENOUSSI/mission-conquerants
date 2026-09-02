@@ -14,20 +14,20 @@ export function FinalCta({
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-accent-700 via-accent-600 to-accent-500 py-20 sm:py-32">
       <GlobeGraphic className="pointer-events-none absolute -bottom-40 -left-40 size-[36rem] text-white/10" />
-      {/* Verset en watermark derrière le contenu */}
+      {/* Verset en watermark derrière le contenu, éditable depuis /admin/parametres */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden px-8 select-none"
       >
         <p className="max-w-5xl text-center font-display text-[2.2rem] leading-tight font-black text-white/8 sm:text-[3.5rem] lg:text-[4.5rem]">
-          Je cherchai parmi eux un homme qui élevât une muraille…
+          {settings.heroVerseText}
         </p>
       </span>
 
       <Container className="relative">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold tracking-[0.25em] text-white/60 uppercase">
-            Ézéchiel 22:30
+            {settings.heroVerseReference}
           </p>
           <h2 className="mt-5 font-display text-3xl leading-[1.1] font-semibold tracking-tight text-white sm:text-5xl">
             Qui se tiendra dans la brèche ?

@@ -40,6 +40,8 @@ export default async function HomePage() {
         subtitle={settings.heroSubtitle}
         imageSrc="/seed-media/equipe-mission.jpg"
         imageAlt="L'équipe de la Mission Les Conquérants sur le terrain"
+        verseText={settings.heroVerseText}
+        verseReference={settings.heroVerseReference}
       />
 
       <CallSection missionText={settings.missionText} />

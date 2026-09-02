@@ -24,6 +24,8 @@ type SiteSettingsValues = {
   heroSubtitle: string;
   missionText: string;
   visionText: string;
+  heroVerseText: string;
+  heroVerseReference: string;
   donationBankName: string | null;
   donationBankAccountName: string | null;
   donationBankAccountNumber: string | null;
@@ -147,6 +149,25 @@ export function SiteSettingsForm({
           <div className="grid gap-2">
             <Label htmlFor="visionText">Texte de vision</Label>
             <Textarea id="visionText" name="visionText" required rows={4} defaultValue={initialValues.visionText} />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="heroVerseText">Verset (sous les boutons de l&apos;accueil)</Label>
+            <Textarea
+              id="heroVerseText"
+              name="heroVerseText"
+              required
+              rows={3}
+              defaultValue={initialValues.heroVerseText}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="heroVerseReference">Référence du verset</Label>
+            <Input
+              id="heroVerseReference"
+              name="heroVerseReference"
+              required
+              defaultValue={initialValues.heroVerseReference}
+            />
           </div>
         </TabsContent>
 

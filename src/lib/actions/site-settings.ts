@@ -25,6 +25,8 @@ export async function updateSiteSettings(formData: FormData): Promise<ActionResu
     heroSubtitle: formData.get("heroSubtitle"),
     missionText: formData.get("missionText"),
     visionText: formData.get("visionText"),
+    heroVerseText: formData.get("heroVerseText"),
+    heroVerseReference: formData.get("heroVerseReference"),
     donationBankName: formData.get("donationBankName"),
     donationBankAccountName: formData.get("donationBankAccountName"),
     donationBankAccountNumber: formData.get("donationBankAccountNumber"),

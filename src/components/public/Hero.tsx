@@ -10,11 +10,15 @@ export function Hero({
   subtitle,
   imageSrc,
   imageAlt,
+  verseText,
+  verseReference,
 }: {
   title: string;
   subtitle: string;
   imageSrc: string;
   imageAlt: string;
+  verseText: string;
+  verseReference: string;
 }) {
   return (
     <section className="relative -mt-16 min-h-[100dvh] overflow-hidden bg-navy-900 pt-16">
@@ -43,7 +47,7 @@ export function Hero({
         <div className="flex flex-1 flex-col justify-center">
           <Reveal>
             <p className="text-xs font-medium tracking-[0.22em] text-accent-400 uppercase">
-              Ézéchiel 22:30
+              {verseReference}
             </p>
             <h1 className="mt-5 max-w-3xl font-display text-4xl leading-[1.08] font-semibold tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
               {title}
@@ -69,17 +73,17 @@ export function Hero({
           </Reveal>
         </div>
 
-        {/* Verset de référence — Ézéchiel 22:30 */}
+        {/* Verset de référence, éditable depuis /admin/parametres */}
         <Reveal delay={0.35}>
           <div className="mb-8 pt-10 sm:mb-10 sm:pt-14">
             <div className="flex items-start gap-4">
               <span aria-hidden className="mt-1 h-px w-10 shrink-0 bg-accent-500/60" />
               <blockquote className="max-w-xl">
                 <p className="font-display text-sm leading-relaxed text-white/60 italic sm:text-base">
-                  &ldquo;Je cherchai parmi eux un homme qui élevât une muraille, et qui se tînt à la brèche devant moi pour le pays…&rdquo;
+                  &ldquo;{verseText}&rdquo;
                 </p>
                 <footer className="mt-2 text-xs font-semibold tracking-[0.18em] text-accent-400 uppercase">
-                  Ézéchiel 22:30
+                  {verseReference}
                 </footer>
               </blockquote>
             </div>
