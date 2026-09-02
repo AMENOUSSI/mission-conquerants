@@ -11,11 +11,11 @@ import type { ActionResult } from "@/lib/actions/media";
 function parseFormData(formData: FormData) {
   return testimonialSchema.safeParse({
     authorName: formData.get("authorName"),
-    authorRole: formData.get("authorRole"),
+    authorRole: formData.get("authorRole") ?? "",
     category: formData.get("category"),
     format: formData.get("format"),
-    quote: formData.get("quote"),
-    videoUrl: formData.get("videoUrl"),
+    quote: formData.get("quote") ?? "",
+    videoUrl: formData.get("videoUrl") ?? "",
     audioMediaId: formData.get("audioMediaId") ?? "",
     photoMediaId: formData.get("photoMediaId") ?? "",
     status: formData.get("status"),
