@@ -19,3 +19,10 @@ export function formatDate(date: Date | string) {
 export function formatDateTime(date: Date | string) {
   return dateTimeFormatter.format(new Date(date));
 }
+
+/** Builds a wa.me deep link from a phone number in any human-typed format. */
+export function whatsappLink(number: string, message?: string) {
+  const digits = number.replace(/[^0-9]/g, "");
+  const query = message ? `?text=${encodeURIComponent(message)}` : "";
+  return `https://wa.me/${digits}${query}`;
+}

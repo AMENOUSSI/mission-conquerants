@@ -7,6 +7,7 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { SiteLogo } from "@/components/public/SiteLogo";
 import { MobileNav } from "@/components/public/MobileNav";
 import { DonationDialog } from "@/components/public/DonationDialog";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { PRIMARY_NAV, MOBILE_NAV } from "@/lib/nav";
 import type { getSiteSettings } from "@/lib/site-settings";
 
@@ -65,12 +66,15 @@ export function SiteHeader({
           </ul>
         </nav>
 
-        <DonationDialog
-          settings={settings}
-          className="hidden shrink-0 rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-700 active:translate-y-px lg:inline-block"
-        >
-          Nous soutenir
-        </DonationDialog>
+        <div className="hidden items-center gap-2 lg:flex">
+          <ThemeToggle className="flex size-9 shrink-0 items-center justify-center rounded-full text-navy-100 transition-colors hover:bg-white/10 hover:text-white" />
+          <DonationDialog
+            settings={settings}
+            className="shrink-0 rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-700 active:translate-y-px"
+          >
+            Nous soutenir
+          </DonationDialog>
+        </div>
 
         <MobileNav items={MOBILE_NAV} settings={settings} />
       </div>

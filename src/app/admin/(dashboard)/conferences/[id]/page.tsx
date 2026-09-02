@@ -22,7 +22,7 @@ export default async function EditConferencePage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier la conférence" description={conference.title} />
+      <AdminPageHeader title="Modifier la conférence" description={conference.title} backHref="/admin/conferences" />
       <ConferenceForm
         action={updateConference.bind(null, conference.id)}
         media={images}

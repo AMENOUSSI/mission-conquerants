@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AdminNavIcon } from "@/components/admin/AdminNavIcon";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { ROLE_LABELS, type AdminNavItem } from "@/lib/admin-nav";
 import type { Role } from "@/generated/prisma/browser";
 import { cn } from "@/lib/utils";
@@ -78,23 +79,27 @@ export function AdminTopbar({
         </nav>
       )}
 
-      <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-2.5 rounded-full outline-none focus-visible:ring-3 focus-visible:ring-accent-500/30">
-          <Avatar className="size-8">
-            <AvatarFallback className="bg-accent-100 text-xs font-semibold text-accent-700">
-              {initials || <UserIcon size={16} />}
-            </AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48">
-          <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={() => signOut({ callbackUrl: "/admin/connexion" })}>
-            <SignOut size={16} />
-            Se déconnecter
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center gap-2">
+        <ThemeToggle className="flex size-9 items-center justify-center rounded-lg text-ink-700 hover:bg-surface-muted" />
+
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-2.5 rounded-full outline-none focus-visible:ring-3 focus-visible:ring-accent-500/30">
+            <Avatar className="size-8">
+              <AvatarFallback className="bg-accent-100 text-xs font-semibold text-accent-700">
+                {initials || <UserIcon size={16} />}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onSelect={() => signOut({ callbackUrl: "/admin/connexion" })}>
+              <SignOut size={16} />
+              Se déconnecter
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </header>
   );
 }

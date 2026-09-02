@@ -19,7 +19,7 @@ export default async function EditPagePage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier la page" description={page.title} />
+      <AdminPageHeader title="Modifier la page" description={page.title} backHref="/admin/pages" />
       <PageForm
         action={updatePage.bind(null, page.id)}
         submitLabel="Enregistrer les modifications"

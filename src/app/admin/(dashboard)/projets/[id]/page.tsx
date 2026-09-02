@@ -22,7 +22,7 @@ export default async function EditProjectPage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier le projet" description={project.title} />
+      <AdminPageHeader title="Modifier le projet" description={project.title} backHref="/admin/projets" />
       <ProjectForm
         action={updateProject.bind(null, project.id)}
         media={images}

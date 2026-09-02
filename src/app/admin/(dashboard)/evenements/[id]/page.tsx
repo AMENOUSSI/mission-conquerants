@@ -22,7 +22,7 @@ export default async function EditEventPage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier l'événement" description={event.title} />
+      <AdminPageHeader title="Modifier l'événement" description={event.title} backHref="/admin/evenements" />
       <EventForm
         action={updateEvent.bind(null, event.id)}
         media={images}

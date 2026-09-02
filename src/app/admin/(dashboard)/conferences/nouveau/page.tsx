@@ -11,7 +11,11 @@ export default async function NewConferencePage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouvelle conférence" description="Publiez le résumé vidéo d'une conférence." />
+      <AdminPageHeader
+        title="Nouvelle conférence"
+        description="Publiez le résumé vidéo d'une conférence."
+        backHref="/admin/conferences"
+      />
       <ConferenceForm action={createConference} media={media} userRole={user.role} submitLabel="Créer la conférence" />
     </div>
   );

@@ -11,7 +11,11 @@ export default async function NewArticlePage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouvel article" description="Rédigez une nouvelle actualité." />
+      <AdminPageHeader
+        title="Nouvel article"
+        description="Rédigez une nouvelle actualité."
+        backHref="/admin/articles"
+      />
       <PostForm action={createPost} media={media} userRole={user.role} submitLabel="Créer l'article" />
     </div>
   );

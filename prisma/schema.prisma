@@ -249,6 +249,7 @@ model SiteSettings {
   tagline      String   @default("Être la lumière des nations")
   contactEmail String   @default("contact@missionlesconquerants.org")
   contactPhone String?
+  whatsappNumber String?
   address      String?
   facebookUrl  String?
   instagramUrl String?

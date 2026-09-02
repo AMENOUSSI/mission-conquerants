@@ -7,6 +7,7 @@ const FALLBACK_SETTINGS = {
   tagline: "Être la lumière des nations",
   contactEmail: "contact@missionlesconquerants.org",
   contactPhone: null as string | null,
+  whatsappNumber: null as string | null,
   address: null as string | null,
   facebookUrl: null as string | null,
   instagramUrl: null as string | null,

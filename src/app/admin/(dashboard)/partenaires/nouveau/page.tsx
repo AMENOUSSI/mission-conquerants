@@ -11,7 +11,11 @@ export default async function NewPartnerPage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouveau partenaire" description="Ajoutez une organisation partenaire." />
+      <AdminPageHeader
+        title="Nouveau partenaire"
+        description="Ajoutez une organisation partenaire."
+        backHref="/admin/partenaires"
+      />
       <PartnerForm action={createPartner} media={media} submitLabel="Créer le partenaire" />
     </div>
   );

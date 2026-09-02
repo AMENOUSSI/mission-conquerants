@@ -11,7 +11,11 @@ export default async function NewEventPage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouvel événement" description="Planifiez un séminaire ou un rassemblement." />
+      <AdminPageHeader
+        title="Nouvel événement"
+        description="Planifiez un séminaire ou un rassemblement."
+        backHref="/admin/evenements"
+      />
       <EventForm action={createEvent} media={media} userRole={user.role} submitLabel="Créer l'événement" />
     </div>
   );

@@ -16,7 +16,7 @@ export default async function EditUserPage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier l'utilisateur" description={user.email} />
+      <AdminPageHeader title="Modifier l'utilisateur" description={user.email} backHref="/admin/utilisateurs" />
       <UserForm
         action={updateUser.bind(null, user.id)}
         mode="edit"

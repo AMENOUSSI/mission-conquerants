@@ -22,7 +22,7 @@ export default async function EditPartnerPage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier le partenaire" description={partner.name} />
+      <AdminPageHeader title="Modifier le partenaire" description={partner.name} backHref="/admin/partenaires" />
       <PartnerForm
         action={updatePartner.bind(null, partner.id)}
         media={images}

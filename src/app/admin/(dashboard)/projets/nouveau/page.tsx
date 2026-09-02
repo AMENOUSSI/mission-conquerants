@@ -11,7 +11,11 @@ export default async function NewProjectPage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouveau projet" description="Présentez une nouvelle activité." />
+      <AdminPageHeader
+        title="Nouveau projet"
+        description="Présentez une nouvelle activité."
+        backHref="/admin/projets"
+      />
       <ProjectForm action={createProject} media={media} userRole={user.role} submitLabel="Créer le projet" />
     </div>
   );

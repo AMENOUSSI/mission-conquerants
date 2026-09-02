@@ -14,6 +14,7 @@ type SiteSettingsValues = {
   tagline: string;
   contactEmail: string;
   contactPhone: string | null;
+  whatsappNumber: string | null;
   address: string | null;
   facebookUrl: string | null;
   instagramUrl: string | null;
@@ -83,6 +84,19 @@ export function SiteSettingsForm({
           <div className="grid gap-2">
             <Label htmlFor="contactPhone">Téléphone (facultatif)</Label>
             <Input id="contactPhone" name="contactPhone" defaultValue={initialValues.contactPhone ?? ""} />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="whatsappNumber">Numéro WhatsApp (facultatif)</Label>
+            <Input
+              id="whatsappNumber"
+              name="whatsappNumber"
+              placeholder="+228 91 39 42 43"
+              defaultValue={initialValues.whatsappNumber ?? ""}
+            />
+            <p className="text-xs text-muted-foreground">
+              Avec l&apos;indicatif pays. Fait apparaître le bouton WhatsApp et l&apos;icône dans le pied de
+              page sur le site public ; laisser vide pour les masquer.
+            </p>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="address">Adresse (facultatif)</Label>

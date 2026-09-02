@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
 import { DonationDialog } from "@/components/public/DonationDialog";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import type { getSiteSettings } from "@/lib/site-settings";
 
 export function MobileNav({
@@ -49,6 +50,11 @@ export function MobileNav({
                   </Link>
                 </li>
               ))}
+              <li>
+                <ThemeToggle className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-base font-medium text-navy-100 hover:bg-white/10 hover:text-white">
+                  {(isDark) => <span>{isDark ? "Thème clair" : "Thème sombre"}</span>}
+                </ThemeToggle>
+              </li>
               <li className="mt-2">
                 <DonationDialog
                   settings={settings}

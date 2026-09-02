@@ -5,6 +5,7 @@ export const siteSettingsSchema = z.object({
   tagline: z.string().trim().min(2).max(200),
   contactEmail: z.string().trim().email("Adresse e-mail invalide."),
   contactPhone: z.string().trim().max(50).optional().or(z.literal("")),
+  whatsappNumber: z.string().trim().max(30).optional().or(z.literal("")),
   address: z.string().trim().max(300).optional().or(z.literal("")),
   facebookUrl: z.string().trim().url("URL invalide.").optional().or(z.literal("")),
   instagramUrl: z.string().trim().url("URL invalide.").optional().or(z.literal("")),

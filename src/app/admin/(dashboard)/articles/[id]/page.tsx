@@ -22,7 +22,7 @@ export default async function EditArticlePage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier l'article" description={post.title} />
+      <AdminPageHeader title="Modifier l'article" description={post.title} backHref="/admin/articles" />
       <PostForm
         action={updatePost.bind(null, post.id)}
         media={images}

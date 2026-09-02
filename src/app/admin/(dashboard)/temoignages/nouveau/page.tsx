@@ -18,6 +18,7 @@ export default async function NewTestimonialPage() {
       <AdminPageHeader
         title="Nouveau témoignage"
         description="Ajoutez le témoignage d'un bénéficiaire (kits scolaires, alimentaires, peuples, personnes)."
+        backHref="/admin/temoignages"
       />
       <TestimonialForm
         action={createTestimonial}

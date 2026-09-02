@@ -25,7 +25,11 @@ export default async function EditTestimonialPage({
 
   return (
     <div>
-      <AdminPageHeader title="Modifier le témoignage" description={testimonial.authorName} />
+      <AdminPageHeader
+        title="Modifier le témoignage"
+        description={testimonial.authorName}
+        backHref="/admin/temoignages"
+      />
       <TestimonialForm
         action={updateTestimonial.bind(null, testimonial.id)}
         images={images}

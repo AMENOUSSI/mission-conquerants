@@ -9,7 +9,11 @@ export default async function NewUserPage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouvel utilisateur" description="Créez un compte pour un membre de l'équipe." />
+      <AdminPageHeader
+        title="Nouvel utilisateur"
+        description="Créez un compte pour un membre de l'équipe."
+        backHref="/admin/utilisateurs"
+      />
       <UserForm action={createUser} mode="create" actingRole={actor.role} />
     </div>
   );

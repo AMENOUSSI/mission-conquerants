@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { SiteLogo } from "@/components/public/SiteLogo";
-import { FacebookLogo, InstagramLogo, YoutubeLogo, EnvelopeSimple, Phone, MapPin } from "@phosphor-icons/react/dist/ssr";
+import {
+  FacebookLogo,
+  InstagramLogo,
+  YoutubeLogo,
+  WhatsappLogo,
+  EnvelopeSimple,
+  Phone,
+  MapPin,
+} from "@phosphor-icons/react/dist/ssr";
 import { FOOTER_NAV } from "@/lib/nav";
+import { whatsappLink } from "@/lib/format";
 import type { getSiteSettings } from "@/lib/site-settings";
 
 const ACTIONS = [
@@ -21,6 +30,11 @@ export function SiteFooter({
     { href: settings.facebookUrl, label: "Facebook", Icon: FacebookLogo },
     { href: settings.instagramUrl, label: "Instagram", Icon: InstagramLogo },
     { href: settings.youtubeUrl, label: "YouTube", Icon: YoutubeLogo },
+    {
+      href: settings.whatsappNumber ? whatsappLink(settings.whatsappNumber) : null,
+      label: "WhatsApp",
+      Icon: WhatsappLogo,
+    },
   ].filter((s): s is typeof s & { href: string } => Boolean(s.href));
 
   return (

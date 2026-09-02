@@ -15,6 +15,7 @@ export async function updateSiteSettings(formData: FormData): Promise<ActionResu
     tagline: formData.get("tagline"),
     contactEmail: formData.get("contactEmail"),
     contactPhone: formData.get("contactPhone"),
+    whatsappNumber: formData.get("whatsappNumber"),
     address: formData.get("address"),
     facebookUrl: formData.get("facebookUrl"),
     instagramUrl: formData.get("instagramUrl"),
@@ -40,6 +41,7 @@ export async function updateSiteSettings(formData: FormData): Promise<ActionResu
     data: {
       ...parsed.data,
       contactPhone: parsed.data.contactPhone || null,
+      whatsappNumber: parsed.data.whatsappNumber || null,
       address: parsed.data.address || null,
       facebookUrl: parsed.data.facebookUrl || null,
       instagramUrl: parsed.data.instagramUrl || null,

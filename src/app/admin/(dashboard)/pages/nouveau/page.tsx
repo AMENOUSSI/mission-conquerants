@@ -9,7 +9,11 @@ export default async function NewPagePage() {
 
   return (
     <div>
-      <AdminPageHeader title="Nouvelle page" description="Créez une page libre pour le site." />
+      <AdminPageHeader
+        title="Nouvelle page"
+        description="Créez une page libre pour le site."
+        backHref="/admin/pages"
+      />
       <PageForm action={createPage} submitLabel="Créer la page" />
     </div>
   );
